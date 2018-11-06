@@ -1,4 +1,4 @@
-//VARIABLES
+//GAME LEVEL VALUES
 //===============================================================================================
 
 //Array containing hidden words.
@@ -18,27 +18,43 @@ var quote = ["Never delay kissing a pretty girl or opening a bottle of whiskey. 
     "Too much of anything is bad, but too much good whiskey is barely enough. – Mark Twain"
 ];
 
-//Place holders for wins and guesses
-var wins = [];
-var remainingGuesses = 12;
-var correctGuesses = [];
-var wrongGuesses = [];
+var maxGuesses = 12;            //Max guesses the user is allowed
+
+var lettersGuessed = [];        //Stores the letters the user has guessed
+var currentWordIndex;           //Index of the current word in the array
+var currentWord = [];           //Stores the current word from the array
+var remainingGuesses = 0;       //How many guesses the user has left
+var wrongGuesses = [];          //Stores the incorrect letters guessed by the user
+var gameStart = false;          //Flag for "press any key to start"
+var wins = [];                  //Stores the number of user wins
 
 
 //FUNCTIONS
 //===============================================================================================
 
-//This function loops through each array
-function loopArray(list) {
-    for (var i = 0; i < list.length; i++) {
-        console.log(list[i]); //placing array info into console to prove is working
+//This function resets our Game Level Values
+function resetGame() {
+    remainingGuesses = maxGuesses;
+    gameStart = false;
+
+    //returns the largest integer less than or equal to a given number
+    currentWordIndex = Math.floor(word.length);
+
+    //Clear the arrays
+    lettersGuessed = [];
+    currentWord = [];
+
+    //For-loop to build the guessing word and clear it out
+    for (var i = 0; i < word[currentWordIndex].length; i++) {
+        currentWord.push("_");
     }
+
+    //Use this method? to update the display based on these values
+    updateDisplay()
 }
 
-//Testing loopArray
-loopArray(word);
 
-//Trying to create a loop to capture the characters of each string in the array
+
 
 
 
@@ -46,14 +62,6 @@ loopArray(word);
 
 //GEARS TO THE GAME
 //===============================================================================================
-
-//Captures key input.
-document.onkeyup = function(event) {
-    var 
-}
-
-//Character matches 
-
 
 
 
