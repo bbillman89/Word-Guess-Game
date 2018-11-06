@@ -37,8 +37,8 @@ function resetGame() {
     remainingGuesses = maxGuesses;
     gameStart = false;
 
-    //returns the largest integer less than or equal to a given number
-    currentWordIndex = Math.floor(word.length);
+    //returns the largest integer less than or equal to a given number.
+    currentWordIndex = Math.floor(word.length);                            //Might need to tell this to loop (cycle) through the array. Guessing this may only pick the last word in the array.
 
     //Clear the arrays
     lettersGuessed = [];
@@ -51,6 +51,12 @@ function resetGame() {
 
     //Use this method? to update the display based on these values
     updateDisplay()
+}
+
+function updateDisplay() {
+    document.getElementById("win_count").innerText = wins;
+    document.getElementById("display_letters").innerText = currentWord;
+    
 }
 
 
