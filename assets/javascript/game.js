@@ -38,7 +38,8 @@ function loopArray(list) {
 //Testing loopArray
 loopArray(word);
 
-//Need to figure out the length 
+//Trying to create a loop to capture the characters of each string in the array
+
 
 
 
@@ -46,7 +47,12 @@ loopArray(word);
 //GEARS TO THE GAME
 //===============================================================================================
 
+//Captures key input.
+document.onkeyup = function(event) {
+    var 
+}
 
+//Character matches 
 
 
 
