@@ -2,13 +2,12 @@
 //===============================================================================================
 
 //Array containing hidden words.
-var word = ["Bulliet",
-    "Jim Beam",
-    "Knob Creek",
-    "Buffalo Trace",
-    "Wild Turkey"
+var word = ["bulliet",
+    "jimbeam",
+    "knobcreek",
+    "buffalotrace",
+    "wildturkey"
 ];
-
 
 //Array containing quotes to display after word is guessed correctly
 var quote = ["Never delay kissing a pretty girl or opening a bottle of whiskey. – Ernest Hemingway",
@@ -17,6 +16,15 @@ var quote = ["Never delay kissing a pretty girl or opening a bottle of whiskey. 
     "Always drink your whiskey with your gun hand, to show your friendly intentions. – Scottish Klondiker’s Proverb",
     "Too much of anything is bad, but too much good whiskey is barely enough. – Mark Twain"
 ];
+
+/*
+  var guess=[
+   {name: "Bullet", message="Never delay kissing a pretty girl or opening a bottle of whiskey. – Ernest Hemingway"},
+   {name: "jmbeam", message="Never delay kissing a pretty girl or opening a bottle of whiskey. – Ernest Hemingway"}
+  ];
+  
+  guess[0].name
+*/
 
 var maxGuesses = 12;            //Max guesses the user is allowed
 
@@ -38,7 +46,7 @@ function resetGame() {
     gameStart = false;
 
     //returns the largest integer less than or equal to a given number.
-    currentWordIndex = Math.floor(word.length);                            //Might need to tell this to loop (cycle) through the array. Guessing this may only pick the last word in the array.
+    currentWordIndex = word.length - 1;
 
     //Clear the arrays
     lettersGuessed = [];
@@ -49,27 +57,50 @@ function resetGame() {
         currentWord.push("_");
     }
 
-    //Use this method? to update the display based on these values
+    //Use this to update the display based on these values
     updateDisplay()
 }
 
-function updateDisplay() {
+/*function updateDisplay() {
     document.getElementById("win_count").innerText = wins;
     document.getElementById("display_letters").innerText = currentWord;
     
-}
-
-
-
-
-
-
+}*/
 
 
 //GEARS TO THE GAME
 //===============================================================================================
 
 
+document.onkeydown = function(event) {
+    // If we finished a game, dump one keystroke and reset.
+    if(gameStart) {
+        resetGame();
+        gameStart = false;
+    } else {
+        // Check to make sure a-z was pressed.  Ascii table
+        if(event.keyCode >= 65 && event.keyCode <= 90) {
+            makeGuess(event.key.toLowerCase());
+        }
+    }
+};
+
+function makeGuess(letter) {
+    if (remainingGuesses > 0) {
+        if (!gameStarted) {
+            gameStarted = true;
+        }
+
+        // Make sure we didn't use this letter yet
+        if (guessedLetters.indexOf(letter) === -1) {
+            guessedLetters.push(letter);
+            evaluateGuess(letter);
+        }
+    }
+    
+    updateDisplay();
+    checkWin();
+};
 
 
 
