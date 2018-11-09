@@ -93,6 +93,8 @@ document.onkeydown = function(event) {
             makeGuess(event.key.toLowerCase());
         }
     }
+
+    updateDisplay();
 };
 
 function makeGuess(letter) {
@@ -136,10 +138,18 @@ function evaluateGuess(letter) {
     }
 };
 
+
+//Create a function that will display a random quote
+function quoteDisplay() {
+
+}
+
+
 function checkWin() {
     if(currentWord.indexOf("_") === -1) {
         wins++;
         gameStart = true;
+        //quoteDisplay();
         resetGame();
     }
 };
