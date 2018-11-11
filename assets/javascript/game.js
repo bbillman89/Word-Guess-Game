@@ -1,3 +1,5 @@
+
+
 //GAME LEVEL VALUES
 //===============================================================================================
 
@@ -29,7 +31,8 @@ var quote = ["Never delay kissing a pretty girl or opening a bottle of whiskey. 
 var maxGuesses = 8;            //Max guesses the user is allowed
 
 var lettersGuessed = [];        //Stores the letters the user has guessed
-var currentWordIndex;           //Index of the current word in the array
+var currentWordIndex;           //stores random word with nothing defined
+//var currentWordIndex = "";    //trying to use this to store word from array in order using for-loop
 var currentWord = [];           //Stores the current word from the array
 var remainingGuesses = 0;       //How many guesses the user has left
 var wrongGuesses = [];          //Stores the incorrect letters guessed by the user
@@ -45,8 +48,13 @@ function resetGame() {
     remainingGuesses = maxGuesses;
     gameStart = true;
 
-    //
+    //Used to select random word from word array and stores it in the placeholder currentWordIndex
     currentWordIndex = Math.floor(Math.random() * (word.length));
+
+    /*not 100% sure why this isn't working so I'm going to comment out and use the random word for now.
+    for (var w = 0; w < word.length; w++) {
+        currentWordIndex = word[w];
+    }*/
 
     //Clear the arrays
     lettersGuessed = [];
@@ -57,16 +65,28 @@ function resetGame() {
         currentWord.push("_");
     }
 
-    //Use this to update the display based on these values
+    //Use this to update the display
     updateDisplay()
 }
 
 
-//  Updates the display on the HTML Page
+/*Create a function that will display a random quote
+function quoteDisplay() {
+    for (var q = 0; q < quote.length; q++) {
+        quote.push("_");
+    }
+}*/
+
+
+//Function to update the display
 function updateDisplay() {
 
+    //Shows number of wins on the page
     document.getElementById("win_count").innerText = wins;
+    //Displays the characters of the currentWordIndex
     document.getElementById("display_letters").innerText = "";
+    //document.getElementById("correct_quote").innerText = "";
+    //Used to capture each character
     for (var i = 0; i < currentWord.length; i++) {
         document.getElementById("display_letters").innerText += currentWord[i];
     }
@@ -93,7 +113,7 @@ document.onkeydown = function(event) {
             makeGuess(event.key.toLowerCase());
         }
     }
-
+    
     updateDisplay();
 };
 
@@ -139,20 +159,17 @@ function evaluateGuess(letter) {
 };
 
 
-//Create a function that will display a random quote
-function quoteDisplay() {
-
-}
-
 
 function checkWin() {
     if(currentWord.indexOf("_") === -1) {
         wins++;
         gameStart = true;
+        
         //quoteDisplay();
         resetGame();
     }
 };
+
  
 
 
